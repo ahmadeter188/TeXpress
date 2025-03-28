@@ -1,0 +1,288 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <link rel="stylesheet" href="amazon.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css" integrity="sha512-Evv84Mr4kqVGRNSgIGL/F/aIDqQb7xQ2vcrdIwxfjThSH8CSR7PBEakCr51Ck+w+/U6swU2Im1vVX0SVk9ABhg==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <title>TeXpress</title>
+    <link rel="icon" href="Untitled-1_even_smaller_cropped_resized.png" type="image/x-icon">
+
+</head>
+<body>
+    <header>
+        <h1>TeXpress</h1>
+        <input type="text" id="searchBar" placeholder="Search for products..." oninput="searchProduct()">
+        <a href="Khaled.html">Home</a>
+        <div class="Logo">
+            <img src="Untitled-3.png" alt="Logo" class="logo">
+        </div>
+    </header>
+    <div class="categories">
+        <div class="category">
+            <a href="category1.html">
+                <img src="download (3).jpeg" alt="Scooters">
+                <p>Scooters</p>
+            </a>
+        </div>
+        <div class="category">
+            <a href="category2.html">
+                <img src="download (4).jpeg" alt="Bicycles">
+                <p>Bicycles</p>
+            </a>
+        </div>
+        <div class="category">
+            <a href="category3.html">
+                <img src="download (1).jpeg" alt="Computers">
+                <p>Computers</p>
+            </a>
+        </div>
+        <div class="category">
+            <a href="category4.html">
+                <img src="download (5).jpeg" alt="Tools">
+                <p>Tools</p>
+            </a>
+        </div>
+        <div class="category">
+            <a href="category5.html">
+                <img src="download (2).jpeg" alt="Phones">
+                <p>Phones</p>
+            </a>
+        </div>
+        <div class="category">
+            <a href="category6.html">
+                <img src="images.jpeg" alt="Drills">
+                <p>Drills</p>
+            </a>
+        </div>
+    </div>
+
+    <div class="product-grid" id="product-grid-home">
+        <!-- Products will be inserted here -->
+    </div>
+
+    <div class="product-grid" id="product-grid">
+        <!-- Products will be dynamically inserted here -->
+    </div>
+    
+    <div class="container" id="product-details">
+        <button class="close-btn" onclick="goHome()">X</button>
+        <div class="carousel">
+            <button class="prev" onclick="prevImage()">&#9664;</button>
+            <img id="image-0" class="active" src="" alt="">
+            <img id="image-1" src="" alt="">
+            <img id="image-2" src="" alt="">
+            <button class="next" onclick="nextImage()">&#9654;</button>
+        </div>
+        <div class="details">
+            <h1 id="product-name"></h1>
+            <p id="product-description"></p>
+            <p class="price" id="product-price"></p>
+            
+            <div class="quantity-selector" id="quantity-selector">
+                <label for="quantity">Choose Quantity:</label>
+                <input type="number" id="quantity" min="1" value="1" oninput="validateQuantity()">
+            </div>
+            <button class="buy-btn" onclick="buy()">Buy it</button>
+
+            <div id="color-selector-container">
+                <p>Choose Color:</p>
+                <div id="color-options" class="color-options"></div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        const products = [
+            {
+                id: 1,
+                name: 'Samsung Galaxy S24 Ultra - 12GB Ram - 256GB Storage',
+                description: 'Bring all your favorite TV shows, movies, games, and media content to life in vivid, vibrant Full HD 1080p...',
+                price: '$1,350.00',
+                images: [
+                    'data:image/jpeg;base64,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',
+                    'https://cdn-iibnp.nitrocdn.com/VjyilAmBtWmZaLojjwWFayaMdinRRPlg/assets/images/optimized/rev-f0d6867/www.ourfriday.co.uk/image/cache/catalog/Samsung/samsung-galaxy-s24-ultra-5gsmartphone-tittanium-black-1-2-800x800.png',
+                    'https://www.edgemiddleeast.com/cloud/2024/01/18/mVRNO3WK-Samsung-Galaxy-S24-1200x900.jpg'
+                ],
+                availableColors: ['gold', 'White', 'Gray'], // Colors for this product
+                minQuantity: 1,
+                maxQuantity: 5
+            },
+            {
+                id: 2,
+                name: 'Apple iPhone 12 Pro Max 256GB',
+                description: 'The iPhone 12 Pro Max is designed with a larger screen and advanced camera systems. Capture stunning photos and videos, all while enjoying the powerful performance and sleek design of the iPhone.',
+                price: '$1099',
+                images: [
+                    'https://ipoint.ae/cdn/shop/files/iphone-12-pro-pacific-blue-revibe_5d31b734-3e85-4ddf-80d1-473dca95116b.webp?v=1728852454',
+                    'https://gomaxx.co.za/wp-content/uploads/2024/09/Blue-1.jpeg',
+                    'https://5.imimg.com/data5/SELLER/Default/2023/6/314837966/ZB/ZB/DQ/128338004/apple-iphone-12-pro-max-128gb-256gb-fully-unlocked-1000x1000.jpg'
+                ],
+                availableColors: ['Gold', 'Silver', 'Blue'], // Colors for this product
+                minQuantity: 2,
+                maxQuantity: 10
+            }
+
+
+
+        ];
+
+        let currentImageIndex = 0;
+        const productGrid = document.getElementById('product-grid');
+        const searchBar = document.getElementById('searchBar');
+
+        function displayProducts(productsToDisplay) {
+            productGrid.innerHTML = '';
+            productsToDisplay.forEach(product => {
+                const productElement = document.createElement('div');
+                productElement.className = 'product';
+                productElement.innerHTML = `
+                    <img src="${product.images[0]}" alt="${product.name}">
+                    <h3>${product.name}</h3>
+                    <p>${product.price}</p>
+                `;
+                productElement.onclick = () => viewProduct(product.id);
+                productGrid.appendChild(productElement);
+            });
+        }
+        function viewProduct(id) {
+            const product = products.find(p => p.id === id);
+            if (product) {
+                document.getElementById('product-name').innerText = product.name;
+                document.getElementById('product-description').innerText = product.description;
+                document.getElementById('product-price').innerText = product.price;
+                document.getElementById('image-0').src = product.images[0];
+                document.getElementById('image-1').src = product.images[1];
+                document.getElementById('image-2').src = product.images[2];
+                // Populate color options dynamically
+                const colorOptionsContainer = document.getElementById('color-options');
+                colorOptionsContainer.innerHTML = ''; // Clear previous colors
+                product.availableColors.forEach(color => {
+                    const colorDiv = document.createElement('div');
+                    colorDiv.className = 'color-option';
+                    colorDiv.style.backgroundColor = color.toLowerCase(); // Use color names as background
+                    colorDiv.title = color; // Tooltip with color name
+                    colorDiv.onclick = () => selectColor(color);
+                    colorOptionsContainer.appendChild(colorDiv);
+                });
+                document.getElementById('product-grid').style.display = 'none';
+                document.getElementById('product-details').style.display = 'flex';
+            }
+        }
+        function selectColor(color) {
+            document.querySelectorAll('.color-option').forEach(option => option.classList.remove('selected'));
+            const selectedOption = Array.from(document.querySelectorAll('.color-option')).find(option => option.title === color);
+            if (selectedOption) {
+                selectedOption.classList.add('selected');
+            }
+            console.log(`Selected color: ${color}`);
+        }
+        function goHome() {
+            document.getElementById('product-grid').style.display = 'flex';
+            document.getElementById('product-details').style.display = 'none';
+        }
+        function prevImage() {
+            currentImageIndex = (currentImageIndex - 1 + 3) % 3;
+            updateCarousel();
+        }
+        function nextImage() {
+            currentImageIndex = (currentImageIndex + 1) % 3;
+            updateCarousel();
+        }
+        function updateCarousel() {
+            document.querySelectorAll('.carousel img').forEach((img, index) => {
+                img.classList.remove('active');
+                if (index === currentImageIndex) {
+                    img.classList.add('active');
+                }
+            });
+        }
+        function validateQuantity() {
+            const quantity = document.getElementById('quantity').value;
+            if (quantity < 1) {
+                document.getElementById('quantity').value = 1;
+            }
+        }
+        function buy() {
+    const productName = document.getElementById('product-name').innerText;
+    const productPriceText = document.getElementById('product-price').innerText;
+    const productQuantityText = document.getElementById('quantity').value;
+
+    // Remove $ and commas from the price and convert to float
+    const productPrice = parseFloat(productPriceText.replace(/[$,]/g, ''));
+
+    // Convert quantity to an integer
+    const productQuantity = parseInt(productQuantityText, 10);
+
+    // Check if the price and quantity are valid numbers
+    if (isNaN(productPrice) || isNaN(productQuantity) || productQuantity <= 0) {
+        alert("Please enter a valid quantity and ensure the price is correct.");
+        return;
+    }
+
+    const selectedColor = document.querySelector('.color-option.selected')?.title || 'No color selected';
+    const totalPrice = productPrice * productQuantity;
+
+    const message = `I want to buy:\nProduct: ${productName}\nPrice: $${productPrice.toFixed(2)}\nQuantity: ${productQuantity}\nColor: ${selectedColor}\nTotal: $${totalPrice.toFixed(2)}`;
+
+    const messengerURL=`https://www.messenger.com/t/100003127548351?text=${encodeURIComponent(message)}`;
+
+    window.open(messengerURL, '_blank');
+}
+        
+        function searchProduct() {
+            const query = searchBar.value.toLowerCase();
+            const filteredProducts = products.filter(product => product.name.toLowerCase().includes(query));
+            displayProducts(filteredProducts);
+        }
+        // Initial product display
+        displayProducts(products);
+        const backToTopButton = document.getElementById('back-to-top');
+ // Get the button
+ const goTopBtn = document.getElementById("goTopBtn");
+
+// When the user scrolls down 100px from the top of the document, show the button
+window.onscroll = function() {
+  if (document.body.scrollTop > 100 || document.documentElement.scrollTop > 100) {
+    goTopBtn.style.display = "block";
+  } else {
+    goTopBtn.style.display = "none";
+  }
+};
+
+// When the user clicks on the button, scroll to the top of the document
+function scrollToTop() {
+  window.scrollTo({
+    top: 0,
+    behavior: "smooth"  // Smooth scrolling effect
+  });
+}
+
+    </script>
+<footer class="fixed-footer">
+
+    <div class="footer-container">
+        <footer>
+            <div class="footer-buttons">
+              <a href="https://www.facebook.com/khaled.et.9" class="footer-button">
+                <img src="fac-removebg-preview.png" alt="Instagram">
+              </a>
+              <a href="https://www.messenger.com/t/100003127548351?text=I%20want%20to%20buy%3A%0AProduct%3A%20Samsung%20Galaxy%20S24%20Ultra%20-%2012GB%20Ram%20-%20256GB%20Storage%0APrice%3A%20%241350.00%0AQuantity%3A%201%0AColor%3A%20No%20color%20selected%0ATotal%3A%20%241350.00" class="footer-button">
+                <img src="mess-removebg-preview.png" alt="Facebook">
+              </a>
+              <a href="#" class="footer-button">
+                <img src="insta-removebg-preview.png" alt="Twitter">
+              </a>
+              <a href="#" class="footer-button">
+                <img src="Screenshot 2024-12-31 110750-Photoroom.png" alt="WhatsApp">
+              </a>
+            </div>
+         <h1 class="AHMAD">BUY NOW AND PASS THROUGH <br>THE FUTURE OF <span>ELECTRONICS!</span></br></h1>
+            <h4>&copy; 2025 TeXpress. All Rights Reserved.</h4>
+                
+                </div>
+
+          </footer>
+  </footer>
+
+  
+</body>
+</html>
