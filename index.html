@@ -5,7 +5,9 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css" integrity="sha512-Evv84Mr4kqVGRNSgIGL/F/aIDqQb7xQ2vcrdIwxfjThSH8CSR7PBEakCr51Ck+w+/U6swU2Im1vVX0SVk9ABhg==" crossorigin="anonymous" referrerpolicy="no-referrer" />
     <title>TeXpress</title>
     <link rel="icon" href="texpress_favicon.png" type="image/x-icon">
-
+    <meta name="description" content="TeXpress is a fast and easy way to add, browse, and buy products.">
+    <meta name="keywords" content="TeXpress, Buy, Sell, Products, Marketplace">
+    <meta name="author" content="Ahmad Eter">
 </head>
 <body>
     <header>
@@ -37,7 +39,7 @@
                         <option value="fr">French</option>
                     </select>
                     <label for="langSelect">💵 currency: </label>
-                    <select id="langSelect" onchange="changesite(this.value)">
+                    <select id="langSelect" onchange="translateSite(this.value)">
                         <option value="usd">USD</option>
                         <option value="cad">CAD</option>
                     </select>
@@ -129,7 +131,7 @@ const products = [
   name: 'Samsung Galaxy S24 Ultra - 12GB Ram - 256GB Storage',
   description: '',
   price: '$1,350.00',
-  images: ['hrdhd'],
+  images: ['https://images.samsung.com/lb/smartphones/galaxy-s24-ultra/buy/nonshop_gray.jpg'],
   availableColors: ['gold', 'White', 'Gray'],
   minQuantity: 1,
   maxQuantity: 5,
@@ -139,7 +141,198 @@ const products = [
     { user: "Sara", text: "Battery life is great", rating: 4 }
   ],
   
-} ]
+},
+  {
+    id: 1,
+    name: 'Google Pixel Model 57 - 12GB RAM - 128GB',
+    description: 'A compact phone that doesn’t compromise on power.',
+    price: '$1203.00',
+    images: [
+      'https://m.media-amazon.com/images/I/615rI0PoyOL._AC_SL1500_.jpg',
+      'https://m.media-amazon.com/images/I/715J-fdZF5L._AC_SL1500_.jpg',
+      'https://m.media-amazon.com/images/I/71qhyp7CygL._AC_SL1500_.jpg'
+    ],
+    availableColors: ['Graphite', 'Titanium', 'Pink'],
+    minQuantity: 1,
+    maxQuantity: 5,
+    rating: 5.0,
+    reviews: [
+      { user: 'UserA', text: 'Really solid device.', rating: 4 },
+      { user: 'UserB', text: 'Worth every penny.', rating: 4 }
+    ]
+  },
+  {
+    id: 2,
+    name: 'Vivo Model 90 - 12GB RAM - 512GB',
+    description: 'Built for speed and performance with a stylish design.',
+    price: '$543.00',
+    images: [
+      'https://cdn1.smartprix.com/rx-iF57DhM04-w420-h420/honor-90-5g-12gb-ram.webp',
+      'https://dummyimage.com/600x400/333/fff&text=Phone+Back+2',
+      'https://dummyimage.com/600x400/666/fff&text=Phone+Side+2'
+    ],
+    availableColors: ['Black', 'White', 'Gray'],
+    minQuantity: 1,
+    maxQuantity: 5,
+    rating: 3.7,
+    reviews: [
+      { user: 'UserA', text: 'Really solid device.', rating: 3 },
+      { user: 'UserB', text: 'Worth every penny.', rating: 4 }
+    ]
+  },
+  {
+    id: 3,
+    name: 'Sony PlayStation 5 Slim Edition Gaming Console',
+    description: '1TB SSD, 4K Gaming, Ray Tracing, Up to 120fps, HDR Technology, Tempest 3D AudioTech.',
+    price: '$760.00',
+    images: [
+      'https://cdn.shopify.com/s/files/1/0552/0883/7292/files/ps5-slim_35fcd236-d20b-4098-9a5c-2b7659cb3c93.jpg?v=1699891098',
+      'https://dummyimage.com/600x400/333/fff&text=Phone+Back+3',
+      'https://dummyimage.com/600x400/666/fff&text=Phone+Side+3'
+    ],
+    availableColors: ['Navy', 'Ivory', 'Cyan'],
+    minQuantity: 1,
+    maxQuantity: 5,
+    rating: 4.8,
+    reviews: [
+      { user: 'UserA', text: 'Really solid device.', rating: 5 },
+      { user: 'UserB', text: 'Worth every penny.', rating: 4 }
+    ]
+  },
+  {
+    id: 4,
+    name: 'Oppo Model 40 - 8GB RAM - 256GB',
+    description: 'Smooth, responsive, and beautiful inside out.',
+    price: '$1554.00',
+    images: [
+      'https://cdn.shopify.com/s/files/1/0552/0883/7292/files/infinix-hot-40.jpg?v=1711125268',
+      'https://dummyimage.com/600x400/333/fff&text=Phone+Back+4',
+      'https://dummyimage.com/600x400/666/fff&text=Phone+Side+4'
+    ],
+    availableColors: ['Gold', 'Silver', 'Purple'],
+    minQuantity: 1,
+    maxQuantity: 5,
+    rating: 4.2,
+    reviews: [
+      { user: 'UserA', text: 'Really solid device.', rating: 4 },
+      { user: 'UserB', text: 'Worth every penny.', rating: 5 }
+    ]
+  },
+  {
+    id: 5,
+    name: 'Huawei Model 48 - 16GB RAM - 256GB',
+    description: 'Revolutionary AI integration and sleek form factor.',
+    price: '$1302.00',
+    images: [
+      'https://fdn2.gsmarena.com/vv/pics/huawei/huawei-mate-x6-1.jpg',
+      'https://dummyimage.com/600x400/333/fff&text=Phone+Back+5',
+      'https://dummyimage.com/600x400/666/fff&text=Phone+Side+5'
+    ],
+    availableColors: ['Blue', 'Green', 'Red'],
+    minQuantity: 1,
+    maxQuantity: 5,
+    rating: 4.0,
+    reviews: [
+      { user: 'UserA', text: 'Really solid device.', rating: 4 },
+      { user: 'UserB', text: 'Worth every penny.', rating: 4 }
+    ]
+  },
+  {
+    id: 6,
+    name: 'Sony Xperia Model 95 - 12GB RAM - 512GB',
+    description: 'Capture your world with crystal-clear camera technology.',
+    price: '$1108.00',
+    images: [
+      'https://dummyimage.com/600x400/000/fff&text=Phone+Front+6',
+      'https://dummyimage.com/600x400/333/fff&text=Phone+Back+6',
+      'https://dummyimage.com/600x400/666/fff&text=Phone+Side+6'
+    ],
+    availableColors: ['Graphite', 'Titanium', 'Pink'],
+    minQuantity: 1,
+    maxQuantity: 5,
+    rating: 4.6,
+    reviews: [
+      { user: 'UserA', text: 'Really solid device.', rating: 5 },
+      { user: 'UserB', text: 'Worth every penny.', rating: 4 }
+    ]
+  },
+  {
+    id: 7,
+    name: 'Samsung Model 74 - 16GB RAM - 256GB',
+    description: 'A compact phone that doesn’t compromise on power.',
+    price: '$849.00',
+    images: [
+      'https://dummyimage.com/600x400/000/fff&text=Phone+Front+7',
+      'https://dummyimage.com/600x400/333/fff&text=Phone+Back+7',
+      'https://dummyimage.com/600x400/666/fff&text=Phone+Side+7'
+    ],
+    availableColors: ['Black', 'White', 'Gray'],
+    minQuantity: 1,
+    maxQuantity: 5,
+    rating: 3.6,
+    reviews: [
+      { user: 'UserA', text: 'Really solid device.', rating: 3 },
+      { user: 'UserB', text: 'Worth every penny.', rating: 4 }
+    ]
+  },
+  {
+    id: 8,
+    name: 'OnePlus Model 14 - 12GB RAM - 128GB',
+    description: 'Elegant and powerful with top-tier features.',
+    price: '$1491.00',
+    images: [
+      'https://dummyimage.com/600x400/000/fff&text=Phone+Front+8',
+      'https://dummyimage.com/600x400/333/fff&text=Phone+Back+8',
+      'https://dummyimage.com/600x400/666/fff&text=Phone+Side+8'
+    ],
+    availableColors: ['Blue', 'Green', 'Red'],
+    minQuantity: 1,
+    maxQuantity: 5,
+    rating: 3.5,
+    reviews: [
+      { user: 'UserA', text: 'Really solid device.', rating: 3 },
+      { user: 'UserB', text: 'Worth every penny.', rating: 4 }
+    ]
+  },
+  {
+    id: 9,
+    name: 'Motorola Model 98 - 16GB RAM - 128GB',
+    description: 'Great value with flagship-level features.',
+    price: '$1093.00',
+    images: [
+      'https://dummyimage.com/600x400/000/fff&text=Phone+Front+9',
+      'https://dummyimage.com/600x400/333/fff&text=Phone+Back+9',
+      'https://dummyimage.com/600x400/666/fff&text=Phone+Side+9'
+    ],
+    availableColors: ['Gold', 'Silver', 'Purple'],
+    minQuantity: 1,
+    maxQuantity: 5,
+    rating: 4.9,
+    reviews: [
+      { user: 'UserA', text: 'Really solid device.', rating: 5 },
+      { user: 'UserB', text: 'Worth every penny.', rating: 5 }
+    ]
+  },
+  {
+    id: 10,
+    name: 'Xiaomi Model 25 - 12GB RAM - 512GB',
+    description: 'A high-performance phone with excellent battery life.',
+    price: '$659.00',
+    images: [
+      'https://dummyimage.com/600x400/000/fff&text=Phone+Front+10',
+      'https://dummyimage.com/600x400/333/fff&text=Phone+Back+10',
+      'https://dummyimage.com/600x400/666/fff&text=Phone+Side+10'
+    ],
+    availableColors: ['Navy', 'Ivory', 'Cyan'],
+    minQuantity: 1,
+    maxQuantity: 5,
+    rating: 4.4,
+    reviews: [
+      { user: 'UserA', text: 'Really solid device.', rating: 4 },
+      { user: 'UserB', text: 'Worth every penny.', rating: 4 }
+    ]
+  },
+ ]
 
         const translations = {
     ar: {
@@ -173,13 +366,7 @@ const products = [
          "choose quantity:":"Choisissez la quantité :"
     }
 };
-const currency = {
-cad : {
-    "$1,350.00":"1920.85"
 
-    
-}
-}
 function translateSite(lang) {
     const elementsToTranslate = {
         "Scooters": document.querySelector('div.category:nth-child(1) p'),
@@ -366,11 +553,16 @@ function searchProduct() {
     if (filteredProducts.length > 0) {
         displayProducts(filteredProducts);
     } else if (query) {
-        productGrid.innerHTML = `<p style="font-size: 24px; margin: 20px; text-align: center;">Not Available</p>`;
+        productGrid.innerHTML = `<p style="font-size: 24px; margin: 20px; text-align: center;">Not Found</p>`;
     } else {
         displayProducts(products); // Show all products again if search bar is cleared
     }
-}
+}const toggleButton = document.getElementById('toggleDarkMode');
+
+toggleButton.addEventListener('click', () => {
+  document.body.classList.toggle('dark-mode');
+});
+
     </script>
 <footer class="fixed-footer">
 
@@ -403,13 +595,15 @@ function searchProduct() {
     
   }/* Styles for the Settings Button */
 #settings-btn {
-  padding: 10px 20px;
-  font-size: 16px;
-  cursor: pointer;
- 
-  color: white;
-  border: none;
-  border-radius: 5px;
+    padding: 10px 20px;
+    font-size: 16px;
+    cursor: pointer;
+    position: relative;
+    right: -610px;
+    top: -138px;
+    color: white;
+    border: none;
+    border-radius: 5px;
 }
 
 /* Styles for the Modal */
@@ -465,6 +659,119 @@ color: #121212;
 }
 h2 {
     color: #121212;
+}/* Base font and transition */
+body {
+  font-family: 'Segoe UI', sans-serif;
+  margin: 0;
+  padding: 0;
+  transition: all 0.3s ease;
+}
+
+/* Light Mode (default) */
+body {
+  background-color: #ffffff;
+  color: #111827;
+}
+body {
+  background-color: #ffffff;
+  color: #2768f3;
+}
+.card {
+  background-color: #f1f5f9;
+  color: #111827;
+  padding: 20px;
+  border-radius: 12px;
+  margin: 20px auto;
+  max-width: 400px;
+  box-shadow: 0 2px 6px rgba(0,0,0,0.1);
+}
+
+.product-title {
+  font-size: 1.5rem;
+  font-weight: 600;
+  margin-bottom: 10px;
+  
+}
+
+/* Button styling */
+button {
+  background-color: #3b82f6;
+  color: #ffffff;
+  border: none;
+  padding: 10px 20px;
+  margin: 20px;
+  border-radius: 6px;
+  cursor: pointer;
+  font-weight: bold;
+  transition: background-color 0.3s;
+}
+
+button:hover {
+  background-color: #2563eb;
+}
+
+/* Dark Mode */
+body.dark-mode {
+  background-color: #000000;
+  color: #f8fafc;
+}
+
+body.dark-mode .card {
+  background-color: #000000;
+  color: #000000;
+ 
+}
+.product-name.dark-mode {
+color: #000000;
+background-color: #0ea6e2;
+
+
+}
+body.dark-mode .card .product-name {
+  color: #ffffff;
+}
+body.dark-mode .product-title {
+  color: #000000; 
+}
+
+.categories.dark-mode {
+  
+  border: 2px solid #333;
+
+}
+.product {
+    background: rgb(0, 0, 0);
+    padding: 15px;
+    border: 1px solid #ccc;
+    border-radius: 10px;
+    width: 240px;
+    text-align: center;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    transition: transform 0.3s ease;
+}
+
+.product.dark-mode {
+    background: rgb(0, 0, 0);
+    padding: 15px;
+    border: 1px solid #ccc;
+    border-radius: 10px;
+    width: 240px;
+    text-align: center;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    transition: transform 0.3s ease;
+}
+body.dark-mode button {
+  background-color: #3b82f6;
+}body.dark-mode {
+  
+  color: #2768f3;
+}
+
+
+.searchBar.dark-mode{
+background-color: #000000;
+color: #000000;
+
 }
   </style>
   
